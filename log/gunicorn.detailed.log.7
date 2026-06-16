@@ -1,0 +1,63 @@
+[2026-06-11 14:43:47,567] ERROR log_exception() L875  Exception on /jogos/{id} [GET] - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py L875 
+Traceback (most recent call last):
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask_cors/extension.py", line 206, in wrapped_function
+    return cors_after_request(app_any.make_response(f(*args, **kwargs)))
+                                                    ^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask_openapi3/scaffold.py", line 138, in view_func
+    response = func(**func_kwargs)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/app.py", line 243, in get_jogo
+    logger.warning(f"Erro ao buscar jogo '{jogo_nome}', {error_msg}")
+                                           ^^^^^^^^^
+NameError: name 'jogo_nome' is not defined
+[2026-06-11 14:43:47,593] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:43:47] "[35m[1mGET /jogos/{id}?id=6 HTTP/1.1[0m" 500 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:43:53,940] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:43:53] "GET /jogos/{id}?id=4 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:44:01,550] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:44:01] "GET /jogos/{id}?id=3 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:44:51,144] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:44:51] "GET /jogos HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:45:08,105] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:45:08] "GET /jogos/{id}?id=4 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:45:43,095] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:45:43] "POST /jogos HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:46:00,914] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:46:00] "GET /jogos HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 14:46:11,695] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 14:46:11] "GET /jogos/{id}?id=6 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 15:30:37,062] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 15:30:37] "GET /produtos HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 15:59:46,854] INFO _log() L97   [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.94.85:5000 - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 15:59:46,856] INFO _log() L97   [33mPress CTRL+C to quit[0m - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 15:59:46,858] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:00:59,588] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:00:59] "[32mGET / HTTP/1.1[0m" 302 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:00:59,902] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:00:59] "[32mGET /openapi HTTP/1.1[0m" 308 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:00,225] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:00] "GET /openapi/ HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:00,606] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:00] "GET /openapi/swagger/images/swagger.svg HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:19,070] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:19] "GET /openapi/swagger HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:19,432] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:19] "GET /openapi/swagger/css/swagger-ui.css HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:19,765] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:19] "GET /openapi/swagger/js/swagger-ui-bundle.js HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:20,354] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:20] "GET /openapi/swagger/js/swagger-ui-standalone-preset.js HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:21,486] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:21] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:21,573] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:21] "GET /openapi/swagger/js/swagger-ui-bundle.js HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:21,946] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:21] "GET /openapi/swagger/js/swagger-ui-standalone-preset.js HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:23,777] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:01:23] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:43,665] INFO _log() L97    * Detected change in '/home/caiov/mvp1/gamelog-backend/app.py', reloading - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:01:43,845] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:03:39,844] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:09:21,532] INFO _log() L97    * Detected change in '/home/caiov/mvp1/gamelog-backend/app.py', reloading - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:09:21,697] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:14:10,309] INFO _log() L97    * Detected change in '/home/caiov/mvp1/gamelog-backend/app.py', reloading - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:14:10,492] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:16:22,146] INFO _log() L97    * Detected change in '/home/caiov/mvp1/gamelog-backend/app.py', reloading - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:16:22,314] INFO _log() L97    * Restarting with stat - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:16:30,546] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:16:30] "GET /openapi/openapi.json HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:16:31,346] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:16:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 16:16:39,814] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 16:16:39] "[32mGET / HTTP/1.1[0m" 302 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  

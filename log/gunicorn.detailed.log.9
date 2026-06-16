@@ -1,0 +1,29 @@
+[2026-06-11 11:24:57,849] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 11:24:57] "GET /produto?id=2 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 11:24:58,390] ERROR log_exception() L875  Exception on /produto [GET] - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py L875 
+Traceback (most recent call last):
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask_cors/extension.py", line 206, in wrapped_function
+    return cors_after_request(app_any.make_response(f(*args, **kwargs)))
+                                                    ^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/flask_openapi3/scaffold.py", line 138, in view_func
+    response = func(**func_kwargs)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/caiov/mvp1/gamelog-backend/app.py", line 105, in get_produto
+    logger.warning(f"Erro ao buscar produto '{produto_nome}', {error_msg}")
+                                              ^^^^^^^^^^^^
+NameError: name 'produto_nome' is not defined. Did you mean: 'produto_id'?
+[2026-06-11 11:24:58,400] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 11:24:58] "[35m[1mGET /produto?id=3 HTTP/1.1[0m" 500 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 11:25:06,305] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 11:25:06] "GET /produto?id=2 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 11:53:16,658] INFO _log() L97   127.0.0.1 - - [11/Jun/2026 11:53:16] "GET /produto?id=1 HTTP/1.1" 200 - - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
+[2026-06-11 12:16:20,392] INFO _log() L97    * Detected change in '/home/caiov/mvp1/gamelog-backend/app.py', reloading - call_trace=/home/caiov/mvp1/gamelog-backend/venv/lib/python3.12/site-packages/werkzeug/_internal.py L97  
