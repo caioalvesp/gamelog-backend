@@ -1,0 +1,17 @@
+# Ambientes Virtuais
+venv/
+env/
+.env/
+
+# Logs
+log/
+*.log
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Outros arquivos locais comuns
+.env
+*.sqlite3
