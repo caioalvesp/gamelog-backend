@@ -3,6 +3,7 @@ from typing import Optional, List
 from model.produto import Produto
 from model.jogo import Jogo
 
+
 class JogoSchema(BaseModel):
   """Define como um novo jogo a ser inserido deve ser representado"""
   nome: str = "Super Mario Bros."
@@ -24,6 +25,7 @@ def apresenta_jogos(jogos: List[Jogo]):
   result = []
   for jogo in jogos:
     result.append({
+      "id": jogo.id,
       "nome": jogo.nome,
       "plataforma": jogo.plataforma,
       "zerado": jogo.zerado,
