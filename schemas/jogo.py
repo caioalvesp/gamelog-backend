@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from model.produto import Produto
 from model.jogo import Jogo
 
 
@@ -21,7 +20,7 @@ class ListagemJogosSchema(BaseModel):
   jogos:List[JogoSchema]
 
 def apresenta_jogos(jogos: List[Jogo]):
-  """Retorna uma representação do produto seguindo o schema definido em JogoViewSchema"""
+  """Retorna uma representação do jogo seguindo o schema definido em JogoViewSchema"""
   result = []
   for jogo in jogos:
     result.append({
