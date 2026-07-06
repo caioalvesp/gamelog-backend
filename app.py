@@ -33,9 +33,7 @@ def add_jogo(form: JogoSchema):
 
   jogo = Jogo(
     nome = form.nome,
-    plataforma = form.plataforma,
-    zerado = form.zerado,
-    nota = form.nota
+    plataforma = form.plataforma
   )
   logger.debug(f"Adicionando jogo de nome: '{jogo.nome}'")
   try:
@@ -207,8 +205,9 @@ def del_usuario(query: UsuarioBuscaSchema):
 
 @app.post('/usuario/jogo', tags=[usuario_tag],
           responses={"200": UsuarioViewSchema, "404": ErrorSchema, "400": ErrorSchema})
-def add_jogo_usuario(form: UsuarioJogoSchema):
-    """Associa um Jogo à coleção de um Usuário.
+def add_jogo_usuario(form: UsuarioJogoAddSchema):
+    """Associa um Jogo à coleção de um Usuário, opcionalmente informando
+    se já foi zerado e a nota dada pelo usuário.
 
     Retorna uma representação atualizada do usuário com sua coleção de jogos.
     """
@@ -234,9 +233,43 @@ def add_jogo_usuario(form: UsuarioJogoSchema):
         logger.warning(f"Jogo #{jogo_id} já associado ao usuário #{usuario_id}")
         return {"message": error_msg}, 400
 
-    usuario.adiciona_jogo(jogo)
+    usuario.adiciona_jogo(jogo, zerado=form.zerado, nota=form.nota)
     session.commit()
     logger.debug(f"Jogo #{jogo_id} associado ao usuário #{usuario_id}")
+    return apresenta_usuario(usuario), 200
+
+
+@app.put('/usuario/jogo', tags=[usuario_tag],
+         responses={"200": UsuarioViewSchema, "404": ErrorSchema, "400": ErrorSchema})
+def update_jogo_usuario(form: UsuarioJogoUpdateSchema):
+    """Atualiza o zerado/nota de um Jogo já presente na coleção de um Usuário.
+
+    Retorna uma representação atualizada do usuário com sua coleção de jogos.
+    """
+    usuario_id = form.usuario_id
+    jogo_id = form.jogo_id
+    logger.debug(f"Atualizando associação jogo #{jogo_id} / usuário #{usuario_id}")
+    session = Session()
+
+    usuario = session.query(Usuario).filter(Usuario.id == usuario_id).first()
+    if not usuario:
+        error_msg = "Usuário não encontrado na base :/"
+        logger.warning(f"Erro ao atualizar associação, usuário #{usuario_id} não encontrado, {error_msg}")
+        return {"message": error_msg}, 404
+
+    associacao = usuario.busca_associacao(jogo_id)
+    if not associacao:
+        error_msg = "Jogo não encontrado na coleção do usuário :/"
+        logger.warning(f"Jogo #{jogo_id} não encontrado na coleção do usuário #{usuario_id}")
+        return {"message": error_msg}, 404
+
+    if form.zerado is not None:
+        associacao.zerado = form.zerado
+    if form.nota is not None:
+        associacao.nota = form.nota
+
+    session.commit()
+    logger.debug(f"Associação jogo #{jogo_id} / usuário #{usuario_id} atualizada")
     return apresenta_usuario(usuario), 200
 
 

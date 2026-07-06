@@ -7,8 +7,6 @@ class JogoSchema(BaseModel):
   """Define como um novo jogo a ser inserido deve ser representado"""
   nome: str = "Super Mario Bros."
   plataforma: str = "Super Nintendo Entertainment System"
-  zerado: bool = False
-  nota: int = 9
 
 class JogoBuscaSchema(BaseModel):
   """ Define como deve ser a estrutura que representa a busca, que será feita
@@ -26,9 +24,7 @@ def apresenta_jogos(jogos: List[Jogo]):
     result.append({
       "id": jogo.id,
       "nome": jogo.nome,
-      "plataforma": jogo.plataforma,
-      "zerado": jogo.zerado,
-      "nota": jogo.nota
+      "plataforma": jogo.plataforma
     })
 
   return {"jogos": result}
@@ -38,8 +34,6 @@ class JogoViewSchema(BaseModel):
   id: int = 1
   nome: str = "Super Mario Bros."
   plataforma: str = "Super Nintendo Entertainment System"
-  zerado: bool = False
-  nota: int = 8
 
 class JogoDelSchema(BaseModel):
   """ Define como deve ser a estrutura do dado retornado após uma requisição de remoção. """
@@ -53,7 +47,5 @@ def apresenta_jogo(jogo: Jogo):
   return {
     "id": jogo.id,
     "nome": jogo.nome,
-    "plataforma": jogo.plataforma,
-    "zerado": jogo.zerado,
-    "nota": jogo.nota
+    "plataforma": jogo.plataforma
   }
