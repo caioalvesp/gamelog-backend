@@ -1,6 +1,6 @@
 # GameLog — API (Back-End)
 
-API REST do **GameLog**, responsável por persistir usuários, jogos e a coleção pessoal de cada usuário (se zerou e a nota dada), além de consultar a **RAWG Video Games Database** para trazer capa, data de lançamento, desenvolvedora e nota da crítica dos jogos.
+API REST do **GameLog**, responsável por persistir usuários, jogos e a coleção pessoal de cada usuário (se zerou, a nota dada e em qual plataforma jogou/zerou), além de consultar a **RAWG Video Games Database** para trazer capa, data de lançamento, desenvolvedora e nota da crítica dos jogos.
 
 Este repositório é o módulo **API (Back-End)** do MVP (Cenário 1.1: Interface ↔ API ↔ API Externa). O módulo da interface está no repositório [gamelog-frontend](https://github.com/caioalvesp/gamelog-frontend) (onde também está a imagem de arquitetura completa).
 
