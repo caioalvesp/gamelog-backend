@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, Boolean, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from model import Base
@@ -14,10 +14,12 @@ class UsuarioJogo(Base):
 
     zerado = Column(Boolean, default=False, nullable=False)
     nota = Column(Integer, nullable=True)
+    plataforma = Column(String(100), nullable=True)
 
-    jogo = relationship('Jogo', backref='usuario_associations')
+    jogo = relationship('Jogo', back_populates='usuario_associations')
 
-    def __init__(self, jogo, zerado: bool = False, nota: int = None):
+    def __init__(self, jogo, zerado: bool = False, nota: int = None, plataforma: str = None):
         self.jogo = jogo
         self.zerado = zerado
         self.nota = nota
+        self.plataforma = plataforma

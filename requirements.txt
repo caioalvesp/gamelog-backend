@@ -4,8 +4,11 @@ flask-openapi3
 Flask-SQLAlchemy
 nose2
 pydantic
+python-dotenv
+requests
 SQLAlchemy
 SQLAlchemy-Utils
 typing_extensions
 werkzeug
 flask-openapi3[swagger]
+gunicorn

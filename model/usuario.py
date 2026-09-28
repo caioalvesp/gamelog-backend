@@ -20,8 +20,8 @@ class Usuario(Base):
     def __init__(self, nome: str):
         self.nome = nome
 
-    def adiciona_jogo(self, jogo, zerado: bool = False, nota: int = None):
-        self.jogo_associations.append(UsuarioJogo(jogo=jogo, zerado=zerado, nota=nota))
+    def adiciona_jogo(self, jogo, zerado: bool = False, nota: int = None, plataforma: str = None):
+        self.jogo_associations.append(UsuarioJogo(jogo=jogo, zerado=zerado, nota=nota, plataforma=plataforma))
 
     def remove_jogo(self, jogo):
         associacao = self.busca_associacao(jogo.id)

@@ -1,4 +1,5 @@
-from schemas.jogo import JogoSchema, JogoBuscaSchema, ListagemJogosSchema, apresenta_jogos, JogoViewSchema, JogoDelSchema, apresenta_jogo
+from schemas.jogo import JogoSchema, JogoBuscaSchema, ListagemJogosSchema, apresenta_jogos, JogoViewSchema, JogoDelSchema, apresenta_jogo, \
+                          JogoBuscaExternaSchema, JogoExternoSchema, ListagemJogosExternosSchema
 from schemas.error import ErrorSchema
 from schemas.usuario import UsuarioSchema, UsuarioBuscaSchema, UsuarioJogoSchema, \
                             UsuarioJogoAddSchema, UsuarioJogoUpdateSchema, \

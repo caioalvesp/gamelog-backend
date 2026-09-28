@@ -18,19 +18,23 @@ class UsuarioJogoSchema(BaseModel):
 
 class UsuarioJogoAddSchema(BaseModel):
     """Define como deve ser a estrutura para associar um jogo a um usuário,
-    informando opcionalmente se já foi zerado e a nota dada pelo usuário"""
+    informando opcionalmente se já foi zerado, a nota dada pelo usuário e em
+    qual plataforma (dentre as que o jogo possui) ele jogou/zerou"""
     usuario_id: int = 1
     jogo_id: int = 1
     zerado: Optional[bool] = False
     nota: Optional[int] = None
+    plataforma: Optional[str] = None
 
 class UsuarioJogoUpdateSchema(BaseModel):
-    """Define como deve ser a estrutura para atualizar o zerado/nota de um jogo
-    já presente na coleção do usuário. Campos omitidos (None) não são alterados"""
+    """Define como deve ser a estrutura para atualizar o zerado/nota/plataforma
+    de um jogo já presente na coleção do usuário. Campos omitidos (None) não
+    são alterados"""
     usuario_id: int = 1
     jogo_id: int = 1
     zerado: Optional[bool] = None
     nota: Optional[int] = None
+    plataforma: Optional[str] = None
 
 class UsuarioViewSchema(BaseModel):
     """Define como um usuário será retornado"""
@@ -57,7 +61,7 @@ def apresenta_usuario(usuario: Usuario):
             {
                 "id": assoc.jogo.id,
                 "nome": assoc.jogo.nome,
-                "plataforma": assoc.jogo.plataforma,
+                "plataforma": assoc.plataforma,
                 "zerado": assoc.zerado,
                 "nota": assoc.nota,
             }

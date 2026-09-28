@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask import redirect
 from urllib.parse import unquote
@@ -6,6 +10,7 @@ from model import Session, Jogo, Usuario
 from logger import logger
 from schemas import *
 from flask_cors import CORS
+from services.rawg_client import buscar_jogos, RawgError
 
 info = Info(title="Minha API", version="1.0.0")
 app = OpenAPI(__name__, info=info)
@@ -15,6 +20,7 @@ CORS(app)
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
 jogo_tag = Tag(name="Jogo", description="Adição, visualização e remoção de jogos à base")
 usuario_tag = Tag(name="Usuario", description="Adição, visualização e remoção de usuários e sua coleção de jogos")
+externo_tag = Tag(name="Jogo Externo", description="Busca de metadados de jogos na API externa (RAWG)")
 
 
 @app.get('/', tags=[home_tag])
@@ -33,7 +39,11 @@ def add_jogo(form: JogoSchema):
 
   jogo = Jogo(
     nome = form.nome,
-    plataforma = form.plataforma
+    plataforma = form.plataforma,
+    capa_url = form.capa_url,
+    data_lancamento = form.data_lancamento,
+    desenvolvedora = form.desenvolvedora,
+    nota_critica = form.nota_critica
   )
   logger.debug(f"Adicionando jogo de nome: '{jogo.nome}'")
   try:
@@ -106,16 +116,34 @@ def del_jogo(query: JogoBuscaSchema):
   print(jogo_id)
   logger.debug(f"Deletando dados sobre o jogo #{jogo_id}")
   session = Session()
-  count = session.query(Jogo).filter(Jogo.id == jogo_id).delete()
-  session.commit()
+  jogo = session.query(Jogo).filter(Jogo.id == jogo_id).first()
 
-  if count:
+  if jogo:
+     session.delete(jogo)
+     session.commit()
      logger.debug(f"Deletando jogo #{jogo_id}")
      return {"message": "Jogo removido", "id": jogo_id}
   else:
      error_msg = "Jogo não encontrado na base :/"
      logger.warning(f"Erro ao deletar jogo #'{jogo_id}', {error_msg}")
      return {"message": error_msg}
+
+
+@app.get('/jogo/buscar-externo', tags=[externo_tag],
+         responses={"200": ListagemJogosExternosSchema, "502": ErrorSchema})
+def buscar_jogo_externo(query: JogoBuscaExternaSchema):
+  """Busca jogos por nome na API externa RAWG (Video Games Database) e retorna,
+  já tratados, capa, plataformas, data de lançamento, desenvolvedora e nota da crítica.
+  """
+
+  logger.debug(f"Buscando jogo '{query.nome}' na API externa RAWG")
+  try:
+    resultados = buscar_jogos(query.nome)
+    return {"resultados": resultados}, 200
+  except RawgError as e:
+    error_msg = "Não foi possível consultar a API externa de jogos"
+    logger.warning(f"Erro ao buscar '{query.nome}' na RAWG: {e}")
+    return {"message": error_msg}, 502
 
 
 @app.post('/usuario', tags=[usuario_tag],
@@ -233,7 +261,7 @@ def add_jogo_usuario(form: UsuarioJogoAddSchema):
         logger.warning(f"Jogo #{jogo_id} já associado ao usuário #{usuario_id}")
         return {"message": error_msg}, 400
 
-    usuario.adiciona_jogo(jogo, zerado=form.zerado, nota=form.nota)
+    usuario.adiciona_jogo(jogo, zerado=form.zerado, nota=form.nota, plataforma=form.plataforma)
     session.commit()
     logger.debug(f"Jogo #{jogo_id} associado ao usuário #{usuario_id}")
     return apresenta_usuario(usuario), 200
@@ -267,6 +295,8 @@ def update_jogo_usuario(form: UsuarioJogoUpdateSchema):
         associacao.zerado = form.zerado
     if form.nota is not None:
         associacao.nota = form.nota
+    if form.plataforma is not None:
+        associacao.plataforma = form.plataforma
 
     session.commit()
     logger.debug(f"Associação jogo #{jogo_id} / usuário #{usuario_id} atualizada")
